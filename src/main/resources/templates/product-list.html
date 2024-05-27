@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/base-layout}">
+	<head>
+		<!-- title -->
+		<title>Products</title>
+	</head>
+<body>
+		<!-- breadcrumb-section -->
+		<div layout:fragment="breadcrumb" class="breadcrumb-section breadcrumb-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 offset-lg-2 text-center">
+						<div class="breadcrumb-text">
+							<p>GOOD COFFEE</p>
+							<h1>PRODUCTS</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- products -->
+		<div layout:fragment="contents" class="product-section mt-150 mb-150">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="product-filters">
+							<ul>
+								<li><a th:href="@{/product/list#}" th:classappend="${param.categoryId == null}? 'active'">All</a></li>
+
+								<li th:each="category : ${categories}">
+									<a th:text="${category.name}"
+										th:href="@{/product/list(categoryId=${category.id})}"
+										th:classappend="${param.categoryId != null} ? (${param.categoryId[0] == category.id} ? 'active')">Category Name</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="row product-lists">
+					<div th:each="prod : ${products}" class="col-lg-4 col-md-6 text-center">
+						<div class="single-product-item">
+							<div class="product-image">
+								<a th:href="@{/product/{productId}/detail(productId=${prod.id})}">
+									<img th:src="${prod.imageUrl}" alt="...">
+								</a>
+							</div>
+							<h3 th:text="${prod.name}">Coffee HeHe Product</h3>
+							<p class="product-price" th:with="priceRecord=${prod.priceRecord}">
+								<span th:text="${priceRecord.price} + ' dong'">0 dong</span>
+							</p>
+							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="pagination-wrap">
+							<ul>
+								<li><a href="#">Prev</a></li>
+								<li><a class="active" href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">Next</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end products -->
+
+		<script>
+		</script>
+	</body>
+</html>
