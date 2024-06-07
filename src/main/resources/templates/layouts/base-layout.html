@@ -125,17 +125,20 @@
 						<span class="close-btn"><i class="fas fa-window-close"></i></span>
 						<div class="search-bar">
 							<div class="search-bar-tablecell">
-								<h3>Search For:</h3>
-								<input type="text" placeholder="Keywords">
-								<button type="submit">Search <i
-								class="fas fa-search"></i></button>
+								<form action="#" th:action="@{/product/list}" method="get">
+									<h3>Search For:</h3>
+									<input name="q" type="text" placeholder="Keywords" th:value="${queryString}">
+									<button type="submit">
+										Search <i class="fas fa-search"></i>
+									</button>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- end search arewa -->
+		<!-- end search area -->
 
 		<!-- breadcrumb-section -->
 		<div layout:fragment="breadcrumb">
@@ -151,6 +154,7 @@
 		<!-- jquery -->
 		<script src="/assets/js/jquery-1.11.3.min.js"></script>
 		<!-- bootstrap -->
+		<script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 		<!-- count down -->
 		<script src="/assets/js/jquery.countdown.js"></script>

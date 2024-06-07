@@ -24,9 +24,12 @@
 		<!-- products -->
 		<div layout:fragment="contents" class="product-section mt-150 mb-150">
 			<div class="container">
+				<div th:if="${queryString != null}" class="row" style="margin-bottom: 40px">
+					<h3 th:text="'Search result for ' + ${queryString} + '...'"></h3>
+				</div>
 
-				<div class="row">
-					<div class="col-md-12">
+				<div th:unless="${queryString != null}" class="row">
+					<div class="col-md-10">
 						<div class="product-filters">
 							<ul>
 								<li><a th:href="@{/product/list#}" th:classappend="${param.categoryId == null}? 'active'">All</a></li>
@@ -38,6 +41,41 @@
 								</li>
 							</ul>
 						</div>
+					</div>
+
+					<div class="col-md-auto">
+						<div class="dropdown">
+							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Sort by
+							</button>
+							<div th:with="urlBuilder=${@currentUrlBuilder.get()}"
+								class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+								<a class="dropdown-item" th:href="@{${urlBuilder
+									.replaceQueryParam('pageNo', '1')
+									.replaceQueryParam('sortBy', 'created_on')
+									.replaceQueryParam('sortDirection', 'ASC')
+									.toUriString()}}">Newest</a>
+
+								<a class="dropdown-item" th:href="@{${urlBuilder
+									.replaceQueryParam('pageNo', 1)
+									.replaceQueryParam('sortBy', 'created_on')
+									.replaceQueryParam('sortDirection', 'DESC')
+									.toUriString()}}">Oldest</a>
+
+								<a class="dropdown-item" th:href="@{${urlBuilder
+									.replaceQueryParam('pageNo', 1)
+									.replaceQueryParam('sortBy', 'price')
+									.replaceQueryParam('sortDirection', 'ASC')
+									.toUriString()}}">Lowest price</a>
+
+								<a class="dropdown-item" th:href="@{${urlBuilder
+									.replaceQueryParam('pageNo', 1)
+									.replaceQueryParam('sortBy', 'price')
+									.replaceQueryParam('sortDirection', 'DESC')
+									.toUriString()}}">Highest price</a>
+							</div>
+						</div>	
 					</div>
 				</div>
 
@@ -58,15 +96,18 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<div th:if="${products.totalPages > 0}" class="row">
 					<div class="col-lg-12 text-center">
 						<div class="pagination-wrap">
 							<ul>
-								<li><a href="#">Prev</a></li>
-								<li><a class="active" href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">Next</a></li>
+								<!-- <li><a href="#">Prev</a></li> -->
+
+								<li th:each="pageNumber : ${pageNumbers}">
+									<a th:href="@{/product/list(pageNo=${pageNumber}, pageSize=${products.size})}"
+										th:text=${pageNumber} th:class="${pageNumber == products.number + 1} ? 'active'"></a>
+								</li>
+
+								<!--	<li><a href="#">Next</a></li> -->
 							</ul>
 						</div>
 					</div>
@@ -74,8 +115,6 @@
 			</div>
 		</div>
 		<!-- end products -->
-
-		<script>
-		</script>
+		<script src="assets/bootstrap/js/bootstrap.bundle.js"></script>
 	</body>
 </html>
