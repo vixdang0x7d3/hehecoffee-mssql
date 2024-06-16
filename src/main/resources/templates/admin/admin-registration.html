@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/admin-base-layout}">
+  <head>
+    <title>Accounts</title>
+  </head>
+
+  <body id="reportsPage">
+
+    <div class="" id="home" layout:fragment="contents" >
+
+      <div th:if="${param.success}" class="alert alert-success">
+        New staff is registered successfully
+      </div>
+
+      <!-- row -->
+      <div class="row tm-content-row justify-content-center">
+        <div class="tm-block-col tm-col-account-settings">
+          <div class="tm-bg-primary-dark tm-block tm-block-settings">
+            <h2 class="tm-block-title">Account Details</h2>
+            <form action="#" th:action="@{/admin/register/save}" th:object="${staff}" method="post" class="tm-signup-form row">
+
+              <input
+              id="id"
+              name="id"
+              type="hidden"
+              class="form-control validate"
+              th:field="*{id}" />
+
+              <input
+              id="isActive"
+              name="isActive"
+              type="hidden"
+              class="form-control validate"
+              th:field="*{isActive}" />
+
+              <div class="form-group col-lg-6">
+                <label for="firstname">First Name</label>
+                <input
+                id="firstname"
+                name="firstname"
+                type="text"
+                class="form-control validate"
+                th:field="*{firstname}" />
+              </div>
+
+              <div class="form-group col-lg-6">
+                <label for="lastname">Last Name</label>
+                <input
+                id="lastname"
+                name="lastname"
+                type="text"
+                class="form-control validate"
+                th:field="*{lastname}" />
+              </div>
+
+              <div class="form-group col-lg-6">
+                <label for="email">Email</label>
+                <input
+                id="email"
+                name="email"
+                type="email"
+                class="form-control validate"
+                th:field="*{email}" />
+              </div>
+
+              <div class="form-group col-lg-6">
+                <label for="loginName">Login Name</label>
+                <input
+                id="loginName"
+                name="loginName"
+                type="loginName"
+                class="form-control validate"
+                th:field="*{loginName}" />
+              </div>
+
+              <div class="form-group col-lg-6">
+                <label for="password">Password</label>
+                <input
+                id="password"
+                name="password"
+                type="password"
+                class="form-control validate"
+                th:field="*{password}" />
+              </div>
+
+              <div class="form-group col-lg-6">
+                <label for="passwordReEntered">Re-enter Password</label>
+                <input
+                id="passwordReEntered"
+                name="passwordReEntered"
+                type="passwordReEntered"
+                class="form-control validate"
+                th:field="*{passwordReEntered}" />
+              </div>
+              <div class="form-group col-lg-6">
+                <label for="phone">Phone</label>
+                <input
+                id="phone"
+                name="phone"
+                type="tel"
+                class="form-control validate"
+                th:field="*{phone}" />
+              </div>
+
+              <div class="form-group col-lg-6">
+                <div>
+                  <label for="isAdmin">Is admin ?</label>
+                  <input
+                  id="isAdmin"
+                  name="isAdmin"
+                  type="checkbox"
+                  class="form-control validate"
+                  th:field="*{isAdmin}" />
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="tm-hide-sm">&nbsp;</label>
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block text-uppercase">
+                  Create account 
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

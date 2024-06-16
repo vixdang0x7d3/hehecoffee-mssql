@@ -1,6 +1,5 @@
 package com.lazygroup.hehecoffeemssql.models;
 
-import java.sql.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +37,20 @@ public class Staff {
 
 	private String lastname;
 
+	@Column(unique = true)
 	private String phone;
 
+	@Column(unique = true)
 	private String email;
 
-	@Column(name = "login_name")
+	@Column(name = "login_name", unique = true)
 	private String loginName;
 
 	@Column(name = "password_hash")
 	private String passwordHash;
 
 	@CreationTimestamp
-	@Column(name = "register_on")
+	@Column(name = "registered_on")
 	private LocalDateTime registeredOn;
 
 	@Column(name = "last_login")

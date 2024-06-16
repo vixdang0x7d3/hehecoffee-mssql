@@ -34,8 +34,10 @@ public class Customer {
 
 	private String lastname;
 
+	@Column(unique = true)
 	private String phone;
 
+	@Column(unique = true)
 	private String email;
 
 	@Column(name = "password_hash")

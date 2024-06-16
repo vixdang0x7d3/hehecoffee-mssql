@@ -57,7 +57,7 @@ public class ProductController {
 				modelMap.addAttribute("pageNumbers", pageNumbers);
 			}
 
-			return "product-list";
+			return "/customer/product-list";
 		}
 
 		// handling sorting, categories, pagination
@@ -94,7 +94,7 @@ public class ProductController {
 					}
 				});
 
-		return "product-list";
+		return "/customer/product-list";
 	}
 
 	@GetMapping("/product/{productId}/detail")
@@ -104,6 +104,6 @@ public class ProductController {
 
 		modelMap.addAttribute("product", product);
 
-		return "product-detail";
+		return "/customer/product-detail";
 	}
 }
